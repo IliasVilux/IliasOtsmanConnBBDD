@@ -47,7 +47,7 @@ namespace IliasOtsmanConnBBDD
         private void UpdateJobBtn_Click(object sender, EventArgs e)
         {
             Job jobSelected = (Job)JobsListBox.SelectedItem;
-            FormInsertJob formInsertJob = new FormInsertJob(jobSelected, 1);
+            FormInsertUpdateJob formInsertJob = new FormInsertUpdateJob(jobSelected, 1);
             formInsertJob.ShowDialog();
         }
     }

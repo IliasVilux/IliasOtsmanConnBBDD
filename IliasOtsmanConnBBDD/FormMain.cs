@@ -13,10 +13,10 @@ using System.Windows.Forms;
 
 namespace IliasOtsmanConnBBDD
 {
-    public partial class Form1 : Form
+    public partial class FormMain : Form
     {
         private SqlConnection conn;
-        public Form1()
+        public FormMain()
         {
             InitializeComponent();
         }
@@ -75,7 +75,7 @@ namespace IliasOtsmanConnBBDD
         private void AddBtn_Click(object sender, EventArgs e)
         {
             Job newJob = new Job(null, null, null);
-            FormInsertJob formInsertJob = new FormInsertJob(newJob, 0);
+            FormInsertUpdateJob formInsertJob = new FormInsertUpdateJob(newJob, 0);
             if (formInsertJob.ShowDialog() == DialogResult.OK)
                 InsertJob(newJob);
         }

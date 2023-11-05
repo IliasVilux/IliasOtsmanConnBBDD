@@ -11,12 +11,12 @@ using System.Windows.Forms;
 
 namespace IliasOtsmanConnBBDD
 {
-    public partial class FormInsertJob : Form
+    public partial class FormInsertUpdateJob : Form
     {
         private Job job;
         private int opc; // 0 for create 1 for update
 
-        public FormInsertJob(Job job, int opc)
+        public FormInsertUpdateJob(Job job, int opc)
         {
             InitializeComponent();
             this.job = job;
@@ -34,8 +34,8 @@ namespace IliasOtsmanConnBBDD
             }
             else
             {
-                TitleLabel.Text = $"Modificar {job.JobTitle}";
-                InsertJobBtn.Text = "modificar";
+                TitleLabel.Text = $"Modificar trabajo";
+                InsertJobBtn.Text = "Modificar";
                 TitleTextBox.Text = job.JobTitle;
                 MinNumeric.Value = (decimal)job.MinSalary;
                 MaxNumeric.Value = (decimal)job.MaxSalary;
@@ -59,7 +59,7 @@ namespace IliasOtsmanConnBBDD
 
         private void CheckData()
         {
-            bool verification = TitleTextBox.Text.Length > 0 && MinNumeric.Value > 0 && MaxNumeric.Value > 0 && MaxNumeric.Value > MinNumeric.Value;
+            bool verification = TitleTextBox.Text.Length > 0 && MinNumeric.Value > 0 && MaxNumeric.Value > 0 && MaxNumeric.Value >= MinNumeric.Value;
             InsertJobBtn.Enabled = verification ? true : false;
             InsertJobBtn.BackColor = verification ? SystemColors.Highlight : SystemColors.ActiveCaption;
         }

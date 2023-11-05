@@ -1,6 +1,6 @@
 ﻿namespace IliasOtsmanConnBBDD
 {
-    partial class FormInsertJob
+    partial class FormInsertUpdateJob
     {
         /// <summary>
         /// Required designer variable.
