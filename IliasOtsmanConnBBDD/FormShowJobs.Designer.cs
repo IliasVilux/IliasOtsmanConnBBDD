@@ -30,6 +30,8 @@
         {
             this.label2 = new System.Windows.Forms.Label();
             this.JobsListBox = new System.Windows.Forms.ListBox();
+            this.DelJobBtn = new System.Windows.Forms.Button();
+            this.UpdateJobBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label2
@@ -48,19 +50,54 @@
             // JobsListBox
             // 
             this.JobsListBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.JobsListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.JobsListBox.Dock = System.Windows.Forms.DockStyle.Left;
             this.JobsListBox.FormattingEnabled = true;
-            this.JobsListBox.ItemHeight = 18;
+            this.JobsListBox.ItemHeight = 15;
             this.JobsListBox.Location = new System.Drawing.Point(0, 71);
             this.JobsListBox.Name = "JobsListBox";
-            this.JobsListBox.Size = new System.Drawing.Size(900, 425);
+            this.JobsListBox.Size = new System.Drawing.Size(589, 425);
             this.JobsListBox.TabIndex = 3;
+            this.JobsListBox.SelectedIndexChanged += new System.EventHandler(this.JobsListBox_SelectedIndexChanged);
+            // 
+            // DelJobBtn
+            // 
+            this.DelJobBtn.BackColor = System.Drawing.Color.IndianRed;
+            this.DelJobBtn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.DelJobBtn.Enabled = false;
+            this.DelJobBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DelJobBtn.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.DelJobBtn.Location = new System.Drawing.Point(589, 71);
+            this.DelJobBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.DelJobBtn.Name = "DelJobBtn";
+            this.DelJobBtn.Size = new System.Drawing.Size(311, 42);
+            this.DelJobBtn.TabIndex = 4;
+            this.DelJobBtn.Text = "Eliminar trabajo";
+            this.DelJobBtn.UseVisualStyleBackColor = false;
+            this.DelJobBtn.Click += new System.EventHandler(this.DelJobBtn_Click);
+            // 
+            // UpdateJobBtn
+            // 
+            this.UpdateJobBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.UpdateJobBtn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.UpdateJobBtn.Enabled = false;
+            this.UpdateJobBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UpdateJobBtn.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.UpdateJobBtn.Location = new System.Drawing.Point(589, 113);
+            this.UpdateJobBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.UpdateJobBtn.Name = "UpdateJobBtn";
+            this.UpdateJobBtn.Size = new System.Drawing.Size(311, 42);
+            this.UpdateJobBtn.TabIndex = 5;
+            this.UpdateJobBtn.Text = "Modificar trabajo";
+            this.UpdateJobBtn.UseVisualStyleBackColor = false;
+            this.UpdateJobBtn.Click += new System.EventHandler(this.UpdateJobBtn_Click);
             // 
             // FormShowJobs
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(900, 506);
+            this.Controls.Add(this.UpdateJobBtn);
+            this.Controls.Add(this.DelJobBtn);
             this.Controls.Add(this.JobsListBox);
             this.Controls.Add(this.label2);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -75,5 +112,7 @@
 
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox JobsListBox;
+        private System.Windows.Forms.Button DelJobBtn;
+        private System.Windows.Forms.Button UpdateJobBtn;
     }
 }

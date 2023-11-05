@@ -38,9 +38,10 @@
             // ConnBtn
             // 
             this.ConnBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ConnBtn.Location = new System.Drawing.Point(56, 44);
+            this.ConnBtn.Location = new System.Drawing.Point(42, 36);
+            this.ConnBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ConnBtn.Name = "ConnBtn";
-            this.ConnBtn.Size = new System.Drawing.Size(206, 90);
+            this.ConnBtn.Size = new System.Drawing.Size(154, 73);
             this.ConnBtn.TabIndex = 0;
             this.ConnBtn.Text = "Crear Conexión";
             this.ConnBtn.UseVisualStyleBackColor = true;
@@ -50,18 +51,19 @@
             // 
             this.InfoLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.InfoLabel.Location = new System.Drawing.Point(0, 0);
-            this.InfoLabel.Margin = new System.Windows.Forms.Padding(15, 0, 3, 0);
+            this.InfoLabel.Margin = new System.Windows.Forms.Padding(11, 0, 2, 0);
             this.InfoLabel.Name = "InfoLabel";
-            this.InfoLabel.Size = new System.Drawing.Size(324, 44);
+            this.InfoLabel.Size = new System.Drawing.Size(243, 36);
             this.InfoLabel.TabIndex = 1;
             this.InfoLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // CloseBtn
             // 
             this.CloseBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CloseBtn.Location = new System.Drawing.Point(56, 44);
+            this.CloseBtn.Location = new System.Drawing.Point(42, 36);
+            this.CloseBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.CloseBtn.Name = "CloseBtn";
-            this.CloseBtn.Size = new System.Drawing.Size(206, 90);
+            this.CloseBtn.Size = new System.Drawing.Size(154, 73);
             this.CloseBtn.TabIndex = 2;
             this.CloseBtn.Text = "Cerrar Conexión";
             this.CloseBtn.UseVisualStyleBackColor = true;
@@ -73,9 +75,10 @@
             this.NewJobBtn.BackColor = System.Drawing.SystemColors.Highlight;
             this.NewJobBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NewJobBtn.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.NewJobBtn.Location = new System.Drawing.Point(56, 146);
+            this.NewJobBtn.Location = new System.Drawing.Point(42, 119);
+            this.NewJobBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.NewJobBtn.Name = "NewJobBtn";
-            this.NewJobBtn.Size = new System.Drawing.Size(206, 52);
+            this.NewJobBtn.Size = new System.Drawing.Size(154, 42);
             this.NewJobBtn.TabIndex = 3;
             this.NewJobBtn.Text = "Crear nuevo trabajo";
             this.NewJobBtn.UseVisualStyleBackColor = false;
@@ -87,9 +90,10 @@
             this.ShowJobBtn.BackColor = System.Drawing.SystemColors.Highlight;
             this.ShowJobBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ShowJobBtn.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.ShowJobBtn.Location = new System.Drawing.Point(56, 204);
+            this.ShowJobBtn.Location = new System.Drawing.Point(42, 166);
+            this.ShowJobBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ShowJobBtn.Name = "ShowJobBtn";
-            this.ShowJobBtn.Size = new System.Drawing.Size(206, 52);
+            this.ShowJobBtn.Size = new System.Drawing.Size(154, 42);
             this.ShowJobBtn.TabIndex = 4;
             this.ShowJobBtn.Text = "Lista de trabajos";
             this.ShowJobBtn.UseVisualStyleBackColor = false;
@@ -98,14 +102,15 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(324, 294);
+            this.ClientSize = new System.Drawing.Size(243, 239);
             this.Controls.Add(this.ShowJobBtn);
             this.Controls.Add(this.NewJobBtn);
             this.Controls.Add(this.CloseBtn);
             this.Controls.Add(this.InfoLabel);
             this.Controls.Add(this.ConnBtn);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);

@@ -14,11 +14,32 @@ namespace IliasOtsmanConnBBDD
     public partial class FormInsertJob : Form
     {
         private Job job;
+        private int opc; // 0 for create 1 for update
 
-        public FormInsertJob(Job job)
+        public FormInsertJob(Job job, int opc)
         {
             InitializeComponent();
             this.job = job;
+            this.opc = opc;
+            CheckOption();
+            DialogResult = DialogResult.Cancel;
+        }
+
+        private void CheckOption()
+        {
+            if (opc == 0)
+            {
+                TitleLabel.Text = "Añadir un trabajo";
+                InsertJobBtn.Text = "Crear";
+            }
+            else
+            {
+                TitleLabel.Text = $"Modificar {job.JobTitle}";
+                InsertJobBtn.Text = "modificar";
+                TitleTextBox.Text = job.JobTitle;
+                MinNumeric.Value = (decimal)job.MinSalary;
+                MaxNumeric.Value = (decimal)job.MaxSalary;
+            }
         }
 
         private void TitleTextBox_TextChanged(object sender, EventArgs e)
@@ -38,17 +59,32 @@ namespace IliasOtsmanConnBBDD
 
         private void CheckData()
         {
-            InsertJobBtn.Enabled = (TitleTextBox.Text.Length > 0 && MinNumeric.Value > 0 && (float)MaxNumeric.Value > 0) ? true : false;
-            InsertJobBtn.BackColor = (TitleTextBox.Text.Length > 0 && MinNumeric.Value > 0 && (float)MaxNumeric.Value > 0) ? SystemColors.Highlight : SystemColors.ActiveCaption;
+            bool verification = TitleTextBox.Text.Length > 0 && MinNumeric.Value > 0 && MaxNumeric.Value > 0 && MaxNumeric.Value > MinNumeric.Value;
+            InsertJobBtn.Enabled = verification ? true : false;
+            InsertJobBtn.BackColor = verification ? SystemColors.Highlight : SystemColors.ActiveCaption;
         }
 
         private void InsertJobBtn_Click(object sender, EventArgs e)
+        {
+            if (opc == 0)
+                CreateJob();
+            else
+                UpdateJob();
+        }
+
+        private void CreateJob()
         {
             job.JobTitle = TitleTextBox.Text;
             job.MinSalary = MinNumeric.Value;
             job.MaxSalary = MaxNumeric.Value;
 
+            DialogResult = DialogResult.OK;
             this.Close();
+        }
+
+        private void UpdateJob()
+        {
+            // CODE for update
         }
     }
 }

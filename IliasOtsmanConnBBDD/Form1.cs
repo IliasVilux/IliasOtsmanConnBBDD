@@ -75,11 +75,9 @@ namespace IliasOtsmanConnBBDD
         private void AddBtn_Click(object sender, EventArgs e)
         {
             Job newJob = new Job(null, null, null);
-            FormInsertJob formInsertJob = new FormInsertJob(newJob);
-            formInsertJob.ShowDialog();
-            InsertJob(newJob);
-
-            InsertJob(newJob);
+            FormInsertJob formInsertJob = new FormInsertJob(newJob, 0);
+            if (formInsertJob.ShowDialog() == DialogResult.OK)
+                InsertJob(newJob);
         }
 
         private void ShowJobBtn_Click(object sender, EventArgs e)
@@ -94,10 +92,15 @@ namespace IliasOtsmanConnBBDD
             try
             {
                 string query = $@"INSERT INTO jobs (job_title, min_salary, max_salary)
-                              VALUES ('{j.JobTitle}', {j.MinSalary}, {j.MaxSalary}); SELECT CAST(SCOPE_IDENTITY() as INT)";
-                SqlCommand command = new SqlCommand(query, conn);
-                object id = command.ExecuteScalar();
-                j.JobId = (int)id;
+                              VALUES ('{j.JobTitle}', @salarioMin, @salarioMax); SELECT CAST(SCOPE_IDENTITY() as INT)";
+                using (SqlCommand command = new SqlCommand(query, conn))
+                {
+
+                    command.Parameters.AddWithValue("@salarioMin", j.MinSalary);
+                    command.Parameters.AddWithValue("@salarioMax", j.MaxSalary);
+                    object id = command.ExecuteScalar();
+                    j.JobId = (int)id;
+                }
 
                 InfoLabel.ForeColor = Color.Green;
                 InfoLabel.Text = "Se ha realizado el insert correcamente.";
