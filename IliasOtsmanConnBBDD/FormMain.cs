@@ -96,8 +96,16 @@ namespace IliasOtsmanConnBBDD
                 using (SqlCommand command = new SqlCommand(query, conn))
                 {
 
-                    command.Parameters.AddWithValue("@salarioMin", j.MinSalary);
-                    command.Parameters.AddWithValue("@salarioMax", j.MaxSalary);
+                    if (j.MinSalary == null)
+                        command.Parameters.AddWithValue("@salarioMin", SqlDbType.Decimal).Value = DBNull.Value;
+                    else
+                        command.Parameters.AddWithValue("@salarioMin", j.MinSalary);
+
+                    if (j.MaxSalary == null)
+                        command.Parameters.AddWithValue("@salarioMax", SqlDbType.Decimal).Value = DBNull.Value;
+                    else
+                        command.Parameters.AddWithValue("@salarioMax", j.MaxSalary);
+
                     object id = command.ExecuteScalar();
                     j.JobId = (int)id;
                 }
@@ -126,8 +134,17 @@ namespace IliasOtsmanConnBBDD
             {
                 int jobId = reader.GetInt32(0);
                 string titleJob = reader.GetString(1);
-                decimal? minSal = reader.IsDBNull(2) ? 0 : reader.GetDecimal(3);
-                decimal? maxSal = reader.IsDBNull(3) ? 0 : reader.GetDecimal(3);
+                decimal? minSal;
+                decimal? maxSal;
+                if (reader.IsDBNull(2))
+                    minSal = null;
+                else
+                    minSal = reader.GetDecimal(2);
+
+                if (reader.IsDBNull(3))
+                    maxSal = null;
+                else
+                    maxSal = reader.GetDecimal(3);
 
                 Job job = new Job(titleJob, minSal, maxSal);
                 jobs.Add(job);
