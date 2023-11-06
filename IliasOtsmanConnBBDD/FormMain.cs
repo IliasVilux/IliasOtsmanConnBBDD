@@ -86,20 +86,34 @@ namespace IliasOtsmanConnBBDD
             try
             {
                 string query = $@"INSERT INTO jobs (job_title, min_salary, max_salary)
-                              VALUES ('{j.JobTitle}', @salarioMin, @salarioMax); SELECT CAST(SCOPE_IDENTITY() as INT)";
+                              VALUES (@jobTitle, @salarioMin, @salarioMax); SELECT CAST(SCOPE_IDENTITY() as INT)";
 
                 using (SqlCommand command = new SqlCommand(query, conn))
                 {
+                    SqlParameter jobTitle = new SqlParameter("@jobTitle", SqlDbType.VarChar, 35);
+                    jobTitle.Value = j.JobTitle;
+                    command.Parameters.Add(jobTitle);
+
+                    SqlParameter salarioMin = new SqlParameter("@salarioMin", SqlDbType.Decimal);
+                    salarioMin.Precision = 8;
+                    salarioMin.Scale = 2;
+
+                    SqlParameter salarioMax = new SqlParameter("@salarioMax", SqlDbType.Decimal);
+                    salarioMin.Precision = 8;
+                    salarioMin.Scale = 2;
 
                     if (j.MinSalary == null)
-                        command.Parameters.AddWithValue("@salarioMin", SqlDbType.Decimal).Value = DBNull.Value;
+                        salarioMin.Value = DBNull.Value;
                     else
-                        command.Parameters.AddWithValue("@salarioMin", j.MinSalary);
+                        salarioMin.Value = j.MinSalary;
+                    command.Parameters.Add(salarioMin);
+
 
                     if (j.MaxSalary == null)
-                        command.Parameters.AddWithValue("@salarioMax", SqlDbType.Decimal).Value = DBNull.Value;
+                        salarioMax.Value = DBNull.Value;
                     else
-                        command.Parameters.AddWithValue("@salarioMax", j.MaxSalary);
+                        salarioMax.Value = j.MaxSalary;
+                    command.Parameters.Add(salarioMax);
 
                     object id = command.ExecuteScalar();
                     j.JobId = (int)id;
