@@ -25,6 +25,14 @@ namespace IliasOtsmanConnBBDD
             maxSalary = maxSal;
         }
 
+        public Job(int jobId, string jTitle, decimal? minSal, decimal? maxSal)
+        {
+            this.jobId = jobId;
+            jobTitle = jTitle;
+            minSalary = minSal;
+            maxSalary = maxSal;
+        }
+
         public override string ToString()
         {
             if (MinSalary == null && MaxSalary == null)

@@ -99,8 +99,8 @@ namespace IliasOtsmanConnBBDD
                     salarioMin.Scale = 2;
 
                     SqlParameter salarioMax = new SqlParameter("@salarioMax", SqlDbType.Decimal);
-                    salarioMin.Precision = 8;
-                    salarioMin.Scale = 2;
+                    salarioMax.Precision = 8;
+                    salarioMax.Scale = 2;
 
                     if (j.MinSalary == null)
                         salarioMin.Value = DBNull.Value;
@@ -133,7 +133,7 @@ namespace IliasOtsmanConnBBDD
 
         private void ShowJobsBtn_Click(object sender, EventArgs e)
         {
-            FormShowJobs formShowJobs = new FormShowJobs(SelectJobs());
+            FormShowJobs formShowJobs = new FormShowJobs(SelectJobs(), conn);
             formShowJobs.ShowDialog();
 
         }
@@ -160,7 +160,7 @@ namespace IliasOtsmanConnBBDD
                 else
                     maxSal = reader.GetDecimal(3);
 
-                Job job = new Job(titleJob, minSal, maxSal);
+                Job job = new Job(jobId, titleJob, minSal, maxSal);
                 jobs.Add(job);
             }
             reader.Close();

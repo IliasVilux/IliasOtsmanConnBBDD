@@ -14,10 +14,12 @@ namespace IliasOtsmanConnBBDD
     public partial class FormShowJobs : Form
     {
         List<Job> jobs;
-        public FormShowJobs(List<Job> jobs)
+        SqlConnection conn;
+        public FormShowJobs(List<Job> jobs, SqlConnection conn)
         {
             InitializeComponent();
             this.jobs = jobs;
+            this.conn = conn;
             JobsListBox.Items.AddRange(this.jobs.ToArray());
         }
 
@@ -71,7 +73,44 @@ namespace IliasOtsmanConnBBDD
         {
             try
             {
-                // CODE for update
+                string query = $@"UPDATE jobs SET
+                                 job_title = @jobTitle,
+                                 min_salary = @salarioMin,
+                                 max_salary = @salarioMax
+                                 WHERE job_id = {j.JobId}";
+
+                using (SqlCommand command = new SqlCommand(query, conn))
+                {
+                    SqlParameter jobTitle = new SqlParameter("@jobTitle", SqlDbType.VarChar, 35);
+                    jobTitle.Value = j.JobTitle;
+                    command.Parameters.Add(jobTitle);
+
+                    SqlParameter salarioMin = new SqlParameter("@salarioMin", SqlDbType.Decimal);
+                    salarioMin.Precision = 8;
+                    salarioMin.Scale = 2;
+
+                    SqlParameter salarioMax = new SqlParameter("@salarioMax", SqlDbType.Decimal);
+                    salarioMax.Precision = 8;
+                    salarioMax.Scale = 2;
+
+                    if (j.MinSalary == null)
+                        salarioMin.Value = DBNull.Value;
+                    else
+                        salarioMin.Value = j.MinSalary;
+                    command.Parameters.Add(salarioMin);
+
+
+                    if (j.MaxSalary == null)
+                        salarioMax.Value = DBNull.Value;
+                    else
+                        salarioMax.Value = j.MaxSalary;
+                    command.Parameters.Add(salarioMax);
+
+                    command.ExecuteScalar();
+
+                    JobsListBox.Items.Clear();
+                    JobsListBox.Items.AddRange(this.jobs.ToArray());
+                }
 
                 InfoLabel.ForeColor = Color.Green;
                 InfoLabel.Text = "Se ha modificado correcamente.";
