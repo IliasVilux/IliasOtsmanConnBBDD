@@ -37,8 +37,26 @@ namespace IliasOtsmanConnBBDD
                 TitleLabel.Text = $"Modificar trabajo";
                 InsertJobBtn.Text = "Modificar";
                 TitleTextBox.Text = job.JobTitle;
-                MinNumeric.Value = (decimal)job.MinSalary;
-                MaxNumeric.Value = (decimal)job.MaxSalary;
+
+                if (job.MinSalary == null)
+                {
+                    MinNumeric.Value = 0;
+                    MinNumeric.Enabled = false;
+                    MinNumeric.Enabled = false;
+                    MinSalNullBtn.Text = "Asignar valor";
+                }
+                else
+                    MinNumeric.Value = (decimal)job.MinSalary;
+
+                if (job.MaxSalary == null)
+                {
+                    MaxNumeric.Value = 0;
+                    MaxNumeric.Enabled = false;
+                    MaxNumeric.Enabled = false;
+                    MaxSalNullBtn.Text = "Asignar valor";
+                }
+                else
+                    MaxNumeric.Value = (decimal)job.MaxSalary;
             }
         }
 

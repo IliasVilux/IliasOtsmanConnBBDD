@@ -27,14 +27,14 @@ namespace IliasOtsmanConnBBDD
 
         public override string ToString()
         {
-            if (MinSalary == null)
-                return $"{JobTitle}, con salario mínimo: NO ASIGNADO y salario máximo: {maxSalary}e";
-            if (MaxSalary == null)
-                return $"{JobTitle}, con salario mínimo: {minSalary}e y salario máximo: NO ASIGNADO";
             if (MinSalary == null && MaxSalary == null)
-                return $"{JobTitle}, con salario mínimo: NO ASIGNADO y salario máximo: NO ASIGNADO";
+                return $"{JobTitle} - ningún salrio está asignado";
+            if (MinSalary == null)
+                return $"{JobTitle} - con salario máximo: {maxSalary}e";
+            if (MaxSalary == null)
+                return $"{JobTitle} - con salario mínimo: {minSalary}e";
 
-            return $"{JobTitle}, con salario mínimo: {minSalary}e y salario máximo: {maxSalary}e";
+            return $"{JobTitle} - con salario mínimo: {minSalary}e y salario máximo: {maxSalary}e";
         }
     }
 }

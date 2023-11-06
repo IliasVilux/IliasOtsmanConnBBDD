@@ -93,6 +93,7 @@ namespace IliasOtsmanConnBBDD
             {
                 string query = $@"INSERT INTO jobs (job_title, min_salary, max_salary)
                               VALUES ('{j.JobTitle}', @salarioMin, @salarioMax); SELECT CAST(SCOPE_IDENTITY() as INT)";
+
                 using (SqlCommand command = new SqlCommand(query, conn))
                 {
 
@@ -134,13 +135,12 @@ namespace IliasOtsmanConnBBDD
             {
                 int jobId = reader.GetInt32(0);
                 string titleJob = reader.GetString(1);
-                decimal? minSal;
-                decimal? maxSal;
+                decimal? minSal, maxSal;
+
                 if (reader.IsDBNull(2))
                     minSal = null;
                 else
                     minSal = reader.GetDecimal(2);
-
                 if (reader.IsDBNull(3))
                     maxSal = null;
                 else
