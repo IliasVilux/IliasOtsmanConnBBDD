@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -35,20 +36,53 @@ namespace IliasOtsmanConnBBDD
             DialogResult option = MessageBox.Show($"Seguro que quieres borrar el trabajo: {jobSelected.JobTitle}?", "Confirmation", MessageBoxButtons.OKCancel);
 
             if (option == DialogResult.OK)
-            {
-                // CODE for delete
-            }
-            else
-            {
-                JobsListBox.SelectedIndex = -1;
-            }
+                DeleteJob(jobSelected);
+            JobsListBox.SelectedIndex = -1;
         }
 
         private void UpdateJobBtn_Click(object sender, EventArgs e)
         {
             Job jobSelected = (Job)JobsListBox.SelectedItem;
-            FormInsertUpdateJob formInsertJob = new FormInsertUpdateJob(jobSelected, 1);
-            formInsertJob.ShowDialog();
+            FormInsertUpdateJob formUpdateJob = new FormInsertUpdateJob(jobSelected, 1);
+            if (formUpdateJob.ShowDialog() == DialogResult.OK)
+                UpdateJob(jobSelected);
+            JobsListBox.SelectedIndex = -1;
+        }
+
+        private async void DeleteJob(Job j)
+        {
+            try
+            {
+                // CODE for update
+
+                InfoLabel.ForeColor = Color.Green;
+                InfoLabel.Text = "Se ha eliminado correcamente.";
+                await Task.Delay(2000);
+                InfoLabel.Text = "";
+            }
+            catch (Exception ex)
+            {
+                InfoLabel.ForeColor = Color.Red;
+                InfoLabel.Text = ex.Message;
+            }
+        }
+
+        private async void UpdateJob(Job j)
+        {
+            try
+            {
+                // CODE for update
+
+                InfoLabel.ForeColor = Color.Green;
+                InfoLabel.Text = "Se ha modificado correcamente.";
+                await Task.Delay(2000);
+                InfoLabel.Text = "";
+            }
+            catch (Exception ex)
+            {
+                InfoLabel.ForeColor = Color.Red;
+                InfoLabel.Text = ex.Message;
+            }
         }
     }
 }

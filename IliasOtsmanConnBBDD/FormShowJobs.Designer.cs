@@ -32,6 +32,7 @@
             this.JobsListBox = new System.Windows.Forms.ListBox();
             this.DelJobBtn = new System.Windows.Forms.Button();
             this.UpdateJobBtn = new System.Windows.Forms.Button();
+            this.InfoLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label2
@@ -52,7 +53,7 @@
             this.JobsListBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.JobsListBox.Dock = System.Windows.Forms.DockStyle.Left;
             this.JobsListBox.FormattingEnabled = true;
-            this.JobsListBox.ItemHeight = 15;
+            this.JobsListBox.ItemHeight = 18;
             this.JobsListBox.Location = new System.Drawing.Point(0, 71);
             this.JobsListBox.Name = "JobsListBox";
             this.JobsListBox.Size = new System.Drawing.Size(589, 425);
@@ -91,11 +92,21 @@
             this.UpdateJobBtn.UseVisualStyleBackColor = false;
             this.UpdateJobBtn.Click += new System.EventHandler(this.UpdateJobBtn_Click);
             // 
+            // InfoLabel
+            // 
+            this.InfoLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.InfoLabel.Location = new System.Drawing.Point(589, 155);
+            this.InfoLabel.Name = "InfoLabel";
+            this.InfoLabel.Size = new System.Drawing.Size(311, 341);
+            this.InfoLabel.TabIndex = 6;
+            this.InfoLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // FormShowJobs
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(900, 506);
+            this.Controls.Add(this.InfoLabel);
             this.Controls.Add(this.UpdateJobBtn);
             this.Controls.Add(this.DelJobBtn);
             this.Controls.Add(this.JobsListBox);
@@ -114,5 +125,6 @@
         private System.Windows.Forms.ListBox JobsListBox;
         private System.Windows.Forms.Button DelJobBtn;
         private System.Windows.Forms.Button UpdateJobBtn;
+        private System.Windows.Forms.Label InfoLabel;
     }
 }

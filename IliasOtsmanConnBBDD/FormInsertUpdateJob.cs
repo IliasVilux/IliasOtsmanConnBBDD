@@ -156,13 +156,10 @@ namespace IliasOtsmanConnBBDD
 
         private void InsertJobBtn_Click(object sender, EventArgs e)
         {
-            if (opc == 0)
-                CreateJob();
-            else
-                UpdateJob();
+            PassJobData();
         }
 
-        private void CreateJob()
+        private void PassJobData()
         {
             job.JobTitle = TitleTextBox.Text;
             job.MinSalary = MinNumeric.Enabled ? MinNumeric.Value : (decimal?)null;
@@ -170,11 +167,6 @@ namespace IliasOtsmanConnBBDD
 
             DialogResult = DialogResult.OK;
             this.Close();
-        }
-
-        private void UpdateJob()
-        {
-            // CODE for update
         }
     }
 }
