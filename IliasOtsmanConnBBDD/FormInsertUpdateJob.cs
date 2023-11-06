@@ -14,28 +14,26 @@ namespace IliasOtsmanConnBBDD
     public partial class FormInsertUpdateJob : Form
     {
         private Job job;
-        private int opc; // 0 for create 1 for update
 
         public FormInsertUpdateJob(Job job, int opc)
         {
             InitializeComponent();
             this.job = job;
-            this.opc = opc;
-            CheckOption();
+            CheckOption(opc); // 0 for create 1 for update
             DialogResult = DialogResult.Cancel;
         }
 
-        private void CheckOption()
+        private void CheckOption(int opc)
         {
             if (opc == 0)
             {
                 TitleLabel.Text = "Añadir un trabajo";
-                InsertJobBtn.Text = "Crear";
+                ActionJobBtn.Text = "Crear";
             }
             else
             {
                 TitleLabel.Text = $"Modificar trabajo";
-                InsertJobBtn.Text = "Modificar";
+                ActionJobBtn.Text = "Modificar";
                 TitleTextBox.Text = job.JobTitle;
 
                 if (job.MinSalary == null)
@@ -72,6 +70,36 @@ namespace IliasOtsmanConnBBDD
 
         private void MaxNumeric_ValueChanged(object sender, EventArgs e)
         {
+            CheckData();
+        }
+
+        private void MaxSalNullBtn_Click(object sender, EventArgs e)
+        {
+            if (MaxSalNullBtn.Text == "Sin valor")
+            {
+                MaxNumeric.Enabled = false;
+                MaxSalNullBtn.Text = "Asignar valor";
+            }
+            else
+            {
+                MaxNumeric.Enabled = true;
+                MaxSalNullBtn.Text = "Sin valor";
+            }
+            CheckData();
+        }
+
+        private void MinSalNullBtn_Click(object sender, EventArgs e)
+        {
+            if (MinSalNullBtn.Text == "Sin valor")
+            {
+                MinNumeric.Enabled = false;
+                MinSalNullBtn.Text = "Asignar valor";
+            }
+            else
+            {
+                MinNumeric.Enabled = true;
+                MinSalNullBtn.Text = "Sin valor";
+            }
             CheckData();
         }
 
@@ -112,49 +140,19 @@ namespace IliasOtsmanConnBBDD
                 InsertButtonOff();
         }
 
-        private void MaxSalNullBtn_Click(object sender, EventArgs e)
-        {
-            if (MaxSalNullBtn.Text == "Sin valor")
-            {
-                MaxNumeric.Enabled = false;
-                MaxSalNullBtn.Text = "Asignar valor";
-            }
-            else
-            {
-                MaxNumeric.Enabled = true;
-                MaxSalNullBtn.Text = "Sin valor";
-            }
-            CheckData();
-        }
-
-        private void MinSalNullBtn_Click(object sender, EventArgs e)
-        {
-            if (MinSalNullBtn.Text == "Sin valor")
-            {
-                MinNumeric.Enabled = false;
-                MinSalNullBtn.Text = "Asignar valor";
-            }
-            else
-            {
-                MinNumeric.Enabled = true;
-                MinSalNullBtn.Text = "Sin valor";
-            }
-            CheckData();
-        }
-
         private void InsertButtonOn()
         {
-            InsertJobBtn.Enabled = true;
-            InsertJobBtn.BackColor = SystemColors.Highlight;
+            ActionJobBtn.Enabled = true;
+            ActionJobBtn.BackColor = SystemColors.Highlight;
         }
 
         private void InsertButtonOff()
         {
-            InsertJobBtn.Enabled = false;
-            InsertJobBtn.BackColor = SystemColors.ActiveCaption;
+            ActionJobBtn.Enabled = false;
+            ActionJobBtn.BackColor = SystemColors.ActiveCaption;
         }
 
-        private void InsertJobBtn_Click(object sender, EventArgs e)
+        private void ActionJobBtn_Click(object sender, EventArgs e)
         {
             PassJobData();
         }

@@ -23,7 +23,6 @@ namespace IliasOtsmanConnBBDD
 
         private async void ConnBtn_Click(object sender, EventArgs e)
         {
-            InfoLabel.Text = "";
             try
             {
                 string user = "sa";
@@ -36,6 +35,7 @@ namespace IliasOtsmanConnBBDD
                 InfoLabel.ForeColor = Color.Green;
                 InfoLabel.Text = "La conexión se ha realizado correcamente.";
 
+                // Show add and list jobs buttons
                 CloseBtn.Visible = true;
                 ConnBtn.Visible = false;
                 NewJobBtn.Visible = true;
@@ -58,6 +58,7 @@ namespace IliasOtsmanConnBBDD
                 InfoLabel.ForeColor = Color.Green;
                 InfoLabel.Text = "La conexión se ha cerrado correcamente.";
 
+                // Hide add and list jobs buttons
                 CloseBtn.Visible = false;
                 ConnBtn.Visible = true;
                 NewJobBtn.Visible = false;
@@ -72,19 +73,12 @@ namespace IliasOtsmanConnBBDD
             }
         }
 
-        private void AddBtn_Click(object sender, EventArgs e)
+        private void AddJobBtn_Click(object sender, EventArgs e)
         {
             Job newJob = new Job(null, null, null);
             FormInsertUpdateJob formInsertJob = new FormInsertUpdateJob(newJob, 0);
             if (formInsertJob.ShowDialog() == DialogResult.OK)
                 InsertJob(newJob);
-        }
-
-        private void ShowJobBtn_Click(object sender, EventArgs e)
-        {
-            FormShowJobs formShowJobs = new FormShowJobs(SelectJobs());
-            formShowJobs.ShowDialog();
-
         }
 
         private async void InsertJob(Job j)
@@ -123,6 +117,12 @@ namespace IliasOtsmanConnBBDD
             }
         }
 
+        private void ShowJobsBtn_Click(object sender, EventArgs e)
+        {
+            FormShowJobs formShowJobs = new FormShowJobs(SelectJobs());
+            formShowJobs.ShowDialog();
+
+        }
         private List<Job> SelectJobs()
         {
             List<Job> jobs = new List<Job>();

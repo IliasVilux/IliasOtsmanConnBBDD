@@ -35,7 +35,7 @@
             this.MinNumeric = new System.Windows.Forms.NumericUpDown();
             this.MaxNumeric = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
-            this.InsertJobBtn = new System.Windows.Forms.Button();
+            this.ActionJobBtn = new System.Windows.Forms.Button();
             this.MinSalNullBtn = new System.Windows.Forms.Button();
             this.MaxSalNullBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.MinNumeric)).BeginInit();
@@ -126,25 +126,25 @@
             this.label4.TabIndex = 5;
             this.label4.Text = "Salario máximo";
             // 
-            // InsertJobBtn
+            // ActionJobBtn
             // 
-            this.InsertJobBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.InsertJobBtn.Enabled = false;
-            this.InsertJobBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.InsertJobBtn.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.InsertJobBtn.Location = new System.Drawing.Point(15, 224);
-            this.InsertJobBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.InsertJobBtn.Name = "InsertJobBtn";
-            this.InsertJobBtn.Size = new System.Drawing.Size(320, 52);
-            this.InsertJobBtn.TabIndex = 7;
-            this.InsertJobBtn.UseVisualStyleBackColor = false;
-            this.InsertJobBtn.Click += new System.EventHandler(this.InsertJobBtn_Click);
+            this.ActionJobBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.ActionJobBtn.Enabled = false;
+            this.ActionJobBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ActionJobBtn.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.ActionJobBtn.Location = new System.Drawing.Point(15, 224);
+            this.ActionJobBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ActionJobBtn.Name = "ActionJobBtn";
+            this.ActionJobBtn.Size = new System.Drawing.Size(320, 52);
+            this.ActionJobBtn.TabIndex = 7;
+            this.ActionJobBtn.UseVisualStyleBackColor = false;
+            this.ActionJobBtn.Click += new System.EventHandler(this.ActionJobBtn_Click);
             // 
             // MinSalNullBtn
             // 
             this.MinSalNullBtn.Location = new System.Drawing.Point(15, 180);
             this.MinSalNullBtn.Name = "MinSalNullBtn";
-            this.MinSalNullBtn.Size = new System.Drawing.Size(132, 23);
+            this.MinSalNullBtn.Size = new System.Drawing.Size(149, 23);
             this.MinSalNullBtn.TabIndex = 8;
             this.MinSalNullBtn.Text = "Sin valor";
             this.MinSalNullBtn.UseVisualStyleBackColor = true;
@@ -154,7 +154,7 @@
             // 
             this.MaxSalNullBtn.Location = new System.Drawing.Point(187, 180);
             this.MaxSalNullBtn.Name = "MaxSalNullBtn";
-            this.MaxSalNullBtn.Size = new System.Drawing.Size(131, 23);
+            this.MaxSalNullBtn.Size = new System.Drawing.Size(150, 23);
             this.MaxSalNullBtn.TabIndex = 9;
             this.MaxSalNullBtn.Text = "Sin valor";
             this.MaxSalNullBtn.UseVisualStyleBackColor = true;
@@ -167,7 +167,7 @@
             this.ClientSize = new System.Drawing.Size(349, 288);
             this.Controls.Add(this.MaxSalNullBtn);
             this.Controls.Add(this.MinSalNullBtn);
-            this.Controls.Add(this.InsertJobBtn);
+            this.Controls.Add(this.ActionJobBtn);
             this.Controls.Add(this.MaxNumeric);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.MinNumeric);
@@ -194,7 +194,7 @@
         private System.Windows.Forms.NumericUpDown MinNumeric;
         private System.Windows.Forms.NumericUpDown MaxNumeric;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button InsertJobBtn;
+        private System.Windows.Forms.Button ActionJobBtn;
         private System.Windows.Forms.Button MinSalNullBtn;
         private System.Windows.Forms.Button MaxSalNullBtn;
     }
