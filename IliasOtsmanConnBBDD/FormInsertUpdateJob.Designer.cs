@@ -36,8 +36,6 @@
             this.MaxNumeric = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.ActionJobBtn = new System.Windows.Forms.Button();
-            this.MinSalNullBtn = new System.Windows.Forms.Button();
-            this.MaxSalNullBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.MinNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MaxNumeric)).BeginInit();
             this.SuspendLayout();
@@ -140,33 +138,11 @@
             this.ActionJobBtn.UseVisualStyleBackColor = false;
             this.ActionJobBtn.Click += new System.EventHandler(this.ActionJobBtn_Click);
             // 
-            // MinSalNullBtn
-            // 
-            this.MinSalNullBtn.Location = new System.Drawing.Point(15, 180);
-            this.MinSalNullBtn.Name = "MinSalNullBtn";
-            this.MinSalNullBtn.Size = new System.Drawing.Size(149, 23);
-            this.MinSalNullBtn.TabIndex = 8;
-            this.MinSalNullBtn.Text = "Sin valor";
-            this.MinSalNullBtn.UseVisualStyleBackColor = true;
-            this.MinSalNullBtn.Click += new System.EventHandler(this.MinSalNullBtn_Click);
-            // 
-            // MaxSalNullBtn
-            // 
-            this.MaxSalNullBtn.Location = new System.Drawing.Point(187, 180);
-            this.MaxSalNullBtn.Name = "MaxSalNullBtn";
-            this.MaxSalNullBtn.Size = new System.Drawing.Size(150, 23);
-            this.MaxSalNullBtn.TabIndex = 9;
-            this.MaxSalNullBtn.Text = "Sin valor";
-            this.MaxSalNullBtn.UseVisualStyleBackColor = true;
-            this.MaxSalNullBtn.Click += new System.EventHandler(this.MaxSalNullBtn_Click);
-            // 
             // FormInsertUpdateJob
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(349, 288);
-            this.Controls.Add(this.MaxSalNullBtn);
-            this.Controls.Add(this.MinSalNullBtn);
             this.Controls.Add(this.ActionJobBtn);
             this.Controls.Add(this.MaxNumeric);
             this.Controls.Add(this.label4);
@@ -195,7 +171,5 @@
         private System.Windows.Forms.NumericUpDown MaxNumeric;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button ActionJobBtn;
-        private System.Windows.Forms.Button MinSalNullBtn;
-        private System.Windows.Forms.Button MaxSalNullBtn;
     }
 }

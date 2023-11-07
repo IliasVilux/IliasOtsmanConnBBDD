@@ -103,7 +103,7 @@ namespace IliasOtsmanConnBBDD
 
             if (!string.IsNullOrEmpty(city))
             {
-                query = $@"SELECT * FROM employees e
+                query = @"SELECT * FROM employees e
                           INNER JOIN departments d ON e.department_id = d.department_id
                           INNER JOIN locations l ON d.location_id = l.location_id
                           WHERE l.city = @city";
@@ -115,10 +115,10 @@ namespace IliasOtsmanConnBBDD
                     query += " AND last_name LIKE @inputSurname";
             }
 
-            if (!string.IsNullOrEmpty(name))
+            if (!string.IsNullOrEmpty(name) && string.IsNullOrEmpty(city))
                 query += " AND first_name LIKE @inputName";
 
-            if (!string.IsNullOrEmpty(surname))
+            if (!string.IsNullOrEmpty(surname) && string.IsNullOrEmpty(city))
                 query += " AND last_name LIKE @inputSurname";
 
             using (SqlCommand command = new SqlCommand(query, conn))

@@ -41,8 +41,6 @@ namespace IliasOtsmanConnBBDD
                 {
                     MinNumeric.Value = 0;
                     MinNumeric.Enabled = false;
-                    MinNumeric.Enabled = false;
-                    MinSalNullBtn.Text = "Asignar valor";
                 }
                 else
                     MinNumeric.Value = (decimal)job.MinSalary;
@@ -51,8 +49,6 @@ namespace IliasOtsmanConnBBDD
                 {
                     MaxNumeric.Value = 0;
                     MaxNumeric.Enabled = false;
-                    MaxNumeric.Enabled = false;
-                    MaxSalNullBtn.Text = "Asignar valor";
                 }
                 else
                     MaxNumeric.Value = (decimal)job.MaxSalary;
@@ -74,69 +70,10 @@ namespace IliasOtsmanConnBBDD
             CheckData();
         }
 
-        private void MaxSalNullBtn_Click(object sender, EventArgs e)
-        {
-            if (MaxSalNullBtn.Text == "Sin valor")
-            {
-                MaxNumeric.Enabled = false;
-                MaxSalNullBtn.Text = "Asignar valor";
-            }
-            else
-            {
-                MaxNumeric.Enabled = true;
-                MaxSalNullBtn.Text = "Sin valor";
-            }
-            CheckData();
-        }
-
-        private void MinSalNullBtn_Click(object sender, EventArgs e)
-        {
-            if (MinSalNullBtn.Text == "Sin valor")
-            {
-                MinNumeric.Enabled = false;
-                MinSalNullBtn.Text = "Asignar valor";
-            }
-            else
-            {
-                MinNumeric.Enabled = true;
-                MinSalNullBtn.Text = "Sin valor";
-            }
-            CheckData();
-        }
-
         private void CheckData()
         {
-            int countSalaries = 0;
             if (TitleTextBox.Text.Length > 0)
-            {
-                if (MinNumeric.Enabled && MinNumeric.Value > 0)
-                    countSalaries++;
-                if (MaxNumeric.Enabled && MaxNumeric.Value > 0)
-                    countSalaries++;
-
-                if (countSalaries == 2 && MaxNumeric.Value >= MinNumeric.Value)
-                    InsertButtonOn();
-                else
-                    InsertButtonOff();
-
-                if (MinNumeric.Enabled && !MaxNumeric.Enabled)
-                {
-                    if (MinNumeric.Value > 0)
-                        InsertButtonOn();
-                    else
-                        InsertButtonOff();
-                }
-                if (MaxNumeric.Enabled && !MinNumeric.Enabled)
-                {
-                    if (MaxNumeric.Value > 0)
-                        InsertButtonOn();
-                    else
-                        InsertButtonOff();
-                }
-
-                if (!MinNumeric.Enabled && !MaxNumeric.Enabled)
-                    InsertButtonOn();
-            }
+                InsertButtonOn();
             else
                 InsertButtonOff();
         }
