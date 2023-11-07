@@ -33,6 +33,7 @@
             this.CloseBtn = new System.Windows.Forms.Button();
             this.NewJobBtn = new System.Windows.Forms.Button();
             this.ShowJobBtn = new System.Windows.Forms.Button();
+            this.ShowEmployeesBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ConnBtn
@@ -100,11 +101,27 @@
             this.ShowJobBtn.Visible = false;
             this.ShowJobBtn.Click += new System.EventHandler(this.ShowJobsBtn_Click);
             // 
+            // ShowEmployeesBtn
+            // 
+            this.ShowEmployeesBtn.BackColor = System.Drawing.SystemColors.Highlight;
+            this.ShowEmployeesBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ShowEmployeesBtn.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.ShowEmployeesBtn.Location = new System.Drawing.Point(56, 260);
+            this.ShowEmployeesBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ShowEmployeesBtn.Name = "ShowEmployeesBtn";
+            this.ShowEmployeesBtn.Size = new System.Drawing.Size(205, 52);
+            this.ShowEmployeesBtn.TabIndex = 5;
+            this.ShowEmployeesBtn.Text = "Lista de empleados";
+            this.ShowEmployeesBtn.UseVisualStyleBackColor = false;
+            this.ShowEmployeesBtn.Visible = false;
+            this.ShowEmployeesBtn.Click += new System.EventHandler(this.ShowEmployeesBtn_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(324, 294);
+            this.ClientSize = new System.Drawing.Size(324, 385);
+            this.Controls.Add(this.ShowEmployeesBtn);
             this.Controls.Add(this.ShowJobBtn);
             this.Controls.Add(this.NewJobBtn);
             this.Controls.Add(this.CloseBtn);
@@ -124,6 +141,7 @@
         private System.Windows.Forms.Button CloseBtn;
         private System.Windows.Forms.Button NewJobBtn;
         private System.Windows.Forms.Button ShowJobBtn;
+        private System.Windows.Forms.Button ShowEmployeesBtn;
     }
 }
 

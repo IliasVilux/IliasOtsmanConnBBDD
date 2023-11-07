@@ -40,6 +40,7 @@ namespace IliasOtsmanConnBBDD
                 ConnBtn.Visible = false;
                 NewJobBtn.Visible = true;
                 ShowJobBtn.Visible = true;
+                ShowEmployeesBtn.Visible = true;
 
                 await Task.Delay(2000);
                 InfoLabel.Text = "";
@@ -63,6 +64,7 @@ namespace IliasOtsmanConnBBDD
                 ConnBtn.Visible = true;
                 NewJobBtn.Visible = false;
                 ShowJobBtn.Visible = false;
+                ShowEmployeesBtn.Visible = false;
 
                 await Task.Delay(2000);
                 InfoLabel.Text = "";
@@ -166,6 +168,12 @@ namespace IliasOtsmanConnBBDD
             reader.Close();
 
             return jobs;
+        }
+
+        private void ShowEmployeesBtn_Click(object sender, EventArgs e)
+        {
+            FormShowEmployees formShowEmployees = new FormShowEmployees(conn);
+            formShowEmployees.ShowDialog();
         }
     }
 }
