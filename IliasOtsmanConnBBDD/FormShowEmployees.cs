@@ -11,25 +11,87 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace IliasOtsmanConnBBDD
 {
     public partial class FormShowEmployees : Form
     {
-        SqlConnection conn;
-        List<Employee> employees;
-        List<Location> locations;
+        private SqlConnection conn;
+        private List<Employee> employees;
+        private List<Location> locations;
+
+        private LinkToDDBBDataContext dc = new LinkToDDBBDataContext();
         public FormShowEmployees(SqlConnection conn)
         {
             InitializeComponent();
-            this.conn = conn;
-            employees = GetEmployees(null, null, null);
-            EmployeesListBox.Items.AddRange(employees.ToArray());
+            //this.conn = conn;
+            //employees = GetEmployees(null, null, null);
+            //EmployeesListBox.Items.AddRange(employees.ToArray());
+            //locations = GetLocations();
+            //CitiesComboBox.Items.AddRange(locations.ToArray());
 
-            locations = GetLocations();
+            GetEmployees2(null, null, null);
+            GetLocations2();
+        }
+
+        private void GetEmployees2(string name, string surname, string city)
+        {
+            city = (city == "Todos") ? null : city;
+
+            var data = from e in dc.employees
+                        join d in dc.departments on e.department_id equals d.department_id
+                        join l in dc.locations on d.location_id equals l.location_id
+                        where (city == null || l.city == city) &&
+                              (name == null || e.first_name.StartsWith(name)) &&
+                              (surname == null || e.last_name.StartsWith(surname))
+                        select e;
+
+            foreach (employees emp in data)
+            {
+                EmployeesListBox.Items.Add(emp);
+            }
+
+        }
+
+        private void GetLocations2()
+        {
+            CitiesComboBox.Items.Clear();
+            var data = from l in dc.locations
+                       select l;
+            foreach (locations loc in data)
+            {
+                CitiesComboBox.Items.Add(loc);
+            }
             CitiesComboBox.Items.Add("Todos");
-            CitiesComboBox.Items.AddRange(locations.ToArray());
             CitiesComboBox.SelectedItem = "Todos";
+        }
+
+        private void UpdateList2()
+        {
+            EmployeesListBox.Items.Clear();
+            GetEmployees2(NombreTextBox.Text, ApellidoTextBox.Text, CitiesComboBox.Text);
+
+            if (EmployeesListBox.Items.Count == 0)
+                EmployeesListBox.Items.Add("No hay registros disponibles.");
+        }
+
+        private void NombreTextBox_TextChanged(object sender, EventArgs e)
+        {
+            UpdateList2();
+            //UpdateList();
+        }
+
+        private void ApellidoTextBox_TextChanged(object sender, EventArgs e)
+        {
+            UpdateList2();
+            //UpdateList();
+        }
+
+        private void CitiesComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateList2();
+            //UpdateList();
         }
 
         private List<Employee> GetEmployees(string name, string surname, string city)
@@ -162,26 +224,27 @@ namespace IliasOtsmanConnBBDD
             return locations;
         }
 
-        private void NombreTextBox_TextChanged(object sender, EventArgs e)
-        {
-            UpdateList();
-        }
-
-        private void ApellidoTextBox_TextChanged(object sender, EventArgs e)
-        {
-            UpdateList();
-        }
-
-        private void CitiesComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            UpdateList();
-        }
-
         private void UpdateList()
         {
             employees = GetEmployees(NombreTextBox.Text, ApellidoTextBox.Text, CitiesComboBox.Text);
             EmployeesListBox.Items.Clear();
             EmployeesListBox.Items.AddRange(employees.ToArray());
+        }
+    }
+
+    public partial class employees
+    {
+        public override string ToString()
+        {
+            return $"{first_name} {last_name} - {email} - {phone_number}";
+        }
+    }
+
+    public partial class locations
+    {
+        public override string ToString()
+        {
+            return city;
         }
     }
 }
