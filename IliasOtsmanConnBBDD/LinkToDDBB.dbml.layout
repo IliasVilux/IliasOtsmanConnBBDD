@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 16.75, 8.5" name="LinkToDDBB">
+  <DataContextMoniker Name="/LinkToDDBBDataContext" />
+  <nestedChildShapes>
+    <classShape Id="963f4867-1816-41e3-99b5-e142d6575fc6" absoluteBounds="3.5, 1.625, 2, 1.3862939453124998">
+      <DataClassMoniker Name="/LinkToDDBBDataContext/countries" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ffeaff9f-9f78-4390-8211-5976c40d875e" absoluteBounds="3.515, 2.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="75b29f2a-fcac-4ab1-a278-aefd5f224e3c" absoluteBounds="0.75, 1.75, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/LinkToDDBBDataContext/regions" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0f04fb94-8aac-442b-bc69-da1452a3afb7" absoluteBounds="0.765, 2.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="913922e5-e493-4e72-a549-73e4f584772a" absoluteBounds="9, 1.625, 2, 1.3862939453124998">
+      <DataClassMoniker Name="/LinkToDDBBDataContext/departments" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3ea473d8-3ccb-4d95-b54c-0defa3463e54" absoluteBounds="9.015, 2.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="22e62046-de5b-481c-9231-5c8bc029fd36" absoluteBounds="14.5, 1.5, 2, 1.7708968098958333">
+      <DataClassMoniker Name="/LinkToDDBBDataContext/dependents" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1fca2eb9-dc22-4f2b-a786-b769288b4fcb" absoluteBounds="14.515, 1.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="20d35109-0936-4ceb-83be-402094f204c5" absoluteBounds="11.75, 1, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/LinkToDDBBDataContext/employees" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8504c5cf-e9ec-4d68-b165-ee0b6de5b765" absoluteBounds="11.765, 1.46, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8353e6f7-ce2a-4646-8164-f9f97a95a39d" absoluteBounds="9, 5.5, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/LinkToDDBBDataContext/jobs" />
+      <nestedChildShapes>
+        <elementListCompartment Id="84862010-0fba-44a8-a657-1e6e8838d0ae" absoluteBounds="9.015, 5.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0de48340-4d34-4d45-b11a-24b19c2ca943" absoluteBounds="6.25, 1.375, 2, 1.9631982421874998">
+      <DataClassMoniker Name="/LinkToDDBBDataContext/locations" />
+      <nestedChildShapes>
+        <elementListCompartment Id="68196096-99c8-420c-945e-9902cd0ef30c" absoluteBounds="6.265, 1.835, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 2.34699625651042); (3.5 : 2.34699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/LinkToDDBBDataContext/regions/regions_countries" />
+      <nodes>
+        <classShapeMoniker Id="75b29f2a-fcac-4ab1-a278-aefd5f224e3c" />
+        <classShapeMoniker Id="963f4867-1816-41e3-99b5-e142d6575fc6" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(13.75 : 2.38544840494792); (14.5 : 2.38544840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/LinkToDDBBDataContext/employees/employees_dependents" />
+      <nodes>
+        <classShapeMoniker Id="20d35109-0936-4ceb-83be-402094f204c5" />
+        <classShapeMoniker Id="22e62046-de5b-481c-9231-5c8bc029fd36" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11 : 2.31814697265625); (11.75 : 2.31814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/LinkToDDBBDataContext/departments/departments_employees" />
+      <nodes>
+        <classShapeMoniker Id="913922e5-e493-4e72-a549-73e4f584772a" />
+        <classShapeMoniker Id="20d35109-0936-4ceb-83be-402094f204c5" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(12.4592307692308 : 3.73240397135417); (12.4592307692308 : 3.98240397135417); (13.0546153846154 : 3.98240397135417); (13.0546153846154 : 3.73240397135417)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinkToDDBBDataContext/employees/employees_employees" />
+      <nodes>
+        <classShapeMoniker Id="20d35109-0936-4ceb-83be-402094f204c5" />
+        <classShapeMoniker Id="20d35109-0936-4ceb-83be-402094f204c5" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11 : 6.28929768880208); (12.0733628846154 : 6.28929768880208); (12.0733628846154 : 3.73240397135417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/LinkToDDBBDataContext/jobs/jobs_employees" />
+      <nodes>
+        <classShapeMoniker Id="8353e6f7-ce2a-4646-8164-f9f97a95a39d" />
+        <classShapeMoniker Id="20d35109-0936-4ceb-83be-402094f204c5" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 2.31814697265625); (9 : 2.31814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/LinkToDDBBDataContext/locations/locations_departments" />
+      <nodes>
+        <classShapeMoniker Id="0de48340-4d34-4d45-b11a-24b19c2ca943" />
+        <classShapeMoniker Id="913922e5-e493-4e72-a549-73e4f584772a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 2.31814697265625); (6.25 : 2.31814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/LinkToDDBBDataContext/countries/countries_locations" />
+      <nodes>
+        <classShapeMoniker Id="963f4867-1816-41e3-99b5-e142d6575fc6" />
+        <classShapeMoniker Id="0de48340-4d34-4d45-b11a-24b19c2ca943" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
