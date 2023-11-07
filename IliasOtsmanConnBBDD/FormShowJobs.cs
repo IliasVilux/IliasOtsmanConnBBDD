@@ -38,8 +38,14 @@ namespace IliasOtsmanConnBBDD
             DialogResult option = MessageBox.Show($"Seguro que quieres borrar el trabajo: {jobSelected.JobTitle}?", "Confirmation", MessageBoxButtons.OKCancel);
 
             if (option == DialogResult.OK)
+            {
                 DeleteJob(jobSelected);
+
+                JobsListBox.Items.Clear();
+                JobsListBox.Items.AddRange(this.jobs.ToArray());
+            }
             JobsListBox.SelectedIndex = -1;
+            InsertButtonOff();
         }
 
         private void UpdateJobBtn_Click(object sender, EventArgs e)
@@ -47,15 +53,26 @@ namespace IliasOtsmanConnBBDD
             Job jobSelected = (Job)JobsListBox.SelectedItem;
             FormInsertUpdateJob formUpdateJob = new FormInsertUpdateJob(jobSelected, 1);
             if (formUpdateJob.ShowDialog() == DialogResult.OK)
+            {
                 UpdateJob(jobSelected);
-            JobsListBox.SelectedIndex = -1;
+
+                JobsListBox.Items.Clear();
+                JobsListBox.Items.AddRange(this.jobs.ToArray());
+                JobsListBox.SelectedIndex = -1;
+            }
+            InsertButtonOff();
         }
 
         private async void DeleteJob(Job j)
         {
             try
             {
-                // CODE for update
+                string query = $@"DELETE FROM jobs WHERE job_id = {j.JobId}";
+
+                using (SqlCommand command = new SqlCommand(query, conn))
+                {
+                    command.ExecuteNonQuery();
+                }
 
                 InfoLabel.ForeColor = Color.Green;
                 InfoLabel.Text = "Se ha eliminado correcamente.";
@@ -107,9 +124,6 @@ namespace IliasOtsmanConnBBDD
                     command.Parameters.Add(salarioMax);
 
                     command.ExecuteScalar();
-
-                    JobsListBox.Items.Clear();
-                    JobsListBox.Items.AddRange(this.jobs.ToArray());
                 }
 
                 InfoLabel.ForeColor = Color.Green;
@@ -122,6 +136,24 @@ namespace IliasOtsmanConnBBDD
                 InfoLabel.ForeColor = Color.Red;
                 InfoLabel.Text = ex.Message;
             }
+        }
+
+        private void InsertButtonOn()
+        {
+            DelJobBtn.Enabled = (JobsListBox.SelectedIndex > 0) ? true : false;
+            DelJobBtn.BackColor = (JobsListBox.SelectedIndex > 0) ? System.Drawing.Color.Firebrick : System.Drawing.Color.IndianRed;
+
+            UpdateJobBtn.Enabled = (JobsListBox.SelectedIndex > 0) ? true : false;
+            UpdateJobBtn.BackColor = (JobsListBox.SelectedIndex > 0) ? SystemColors.Highlight : SystemColors.ActiveCaption;
+        }
+
+        private void InsertButtonOff()
+        {
+            DelJobBtn.Enabled = (JobsListBox.SelectedIndex > 0) ? true : false;
+            DelJobBtn.BackColor = (JobsListBox.SelectedIndex > 0) ? System.Drawing.Color.Firebrick : System.Drawing.Color.IndianRed;
+
+            UpdateJobBtn.Enabled = (JobsListBox.SelectedIndex > 0) ? true : false;
+            UpdateJobBtn.BackColor = (JobsListBox.SelectedIndex > 0) ? SystemColors.Highlight : SystemColors.ActiveCaption;
         }
     }
 }
