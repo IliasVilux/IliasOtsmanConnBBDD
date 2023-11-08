@@ -74,100 +74,30 @@ namespace IliasOtsmanConnBBDD
                 InfoLabel.Text = ex.Message;
             }
         }
+        
 
-        private void AddJobBtn_Click(object sender, EventArgs e)
+        private async void AddJobBtn_Click(object sender, EventArgs e)
         {
-            Job newJob = new Job(null, null, null);
-            FormInsertUpdateJob formInsertJob = new FormInsertUpdateJob(newJob, 0);
+            Job job = new Job(null, null, null);
+            FormInsertUpdateJob formInsertJob = new FormInsertUpdateJob(conn, job, 0);
             if (formInsertJob.ShowDialog() == DialogResult.OK)
-                InsertJob(newJob);
-        }
-
-        private async void InsertJob(Job j)
-        {
-            try
             {
-                string query = $@"INSERT INTO jobs (job_title, min_salary, max_salary)
-                              VALUES (@jobTitle, @salarioMin, @salarioMax); SELECT CAST(SCOPE_IDENTITY() as INT)";
-
-                using (SqlCommand command = new SqlCommand(query, conn))
-                {
-                    SqlParameter jobTitle = new SqlParameter("@jobTitle", SqlDbType.VarChar, 35);
-                    jobTitle.Value = j.JobTitle;
-                    command.Parameters.Add(jobTitle);
-
-                    SqlParameter salarioMin = new SqlParameter("@salarioMin", SqlDbType.Decimal);
-                    salarioMin.Precision = 8;
-                    salarioMin.Scale = 2;
-
-                    SqlParameter salarioMax = new SqlParameter("@salarioMax", SqlDbType.Decimal);
-                    salarioMax.Precision = 8;
-                    salarioMax.Scale = 2;
-
-                    if (j.MinSalary == null)
-                        salarioMin.Value = DBNull.Value;
-                    else
-                        salarioMin.Value = j.MinSalary;
-                    command.Parameters.Add(salarioMin);
-
-
-                    if (j.MaxSalary == null)
-                        salarioMax.Value = DBNull.Value;
-                    else
-                        salarioMax.Value = j.MaxSalary;
-                    command.Parameters.Add(salarioMax);
-
-                    object id = command.ExecuteScalar();
-                    j.JobId = (int)id;
-                }
-
                 InfoLabel.ForeColor = Color.Green;
                 InfoLabel.Text = "Se ha realizado el insert correcamente.";
                 await Task.Delay(2000);
                 InfoLabel.Text = "";
-            }
-            catch (Exception ex)
+            } else
             {
                 InfoLabel.ForeColor = Color.Red;
-                InfoLabel.Text = ex.Message;
+                InfoLabel.Text = "No se ha podido realizar el insert :(";
             }
         }
 
         private void ShowJobsBtn_Click(object sender, EventArgs e)
         {
-            FormShowJobs formShowJobs = new FormShowJobs(SelectJobs(), conn);
+            FormShowJobs formShowJobs = new FormShowJobs(conn);
             formShowJobs.ShowDialog();
 
-        }
-        private List<Job> SelectJobs()
-        {
-            List<Job> jobs = new List<Job>();
-
-            string query = "SELECT * FROM jobs";
-            SqlCommand command = new SqlCommand(query, conn);
-            SqlDataReader reader = command.ExecuteReader();
-
-            while (reader.Read())
-            {
-                int jobId = reader.GetInt32(0);
-                string titleJob = reader.GetString(1);
-                decimal? minSal, maxSal;
-
-                if (reader.IsDBNull(2))
-                    minSal = null;
-                else
-                    minSal = reader.GetDecimal(2);
-                if (reader.IsDBNull(3))
-                    maxSal = null;
-                else
-                    maxSal = reader.GetDecimal(3);
-
-                Job job = new Job(jobId, titleJob, minSal, maxSal);
-                jobs.Add(job);
-            }
-            reader.Close();
-
-            return jobs;
         }
 
         private void ShowEmployeesBtn_Click(object sender, EventArgs e)

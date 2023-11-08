@@ -14,13 +14,21 @@ namespace IliasOtsmanConnBBDD
 {
     public partial class FormInsertUpdateJob : Form
     {
-        private Job job;
+        SqlConnection conn;
+        int opc;
 
-        public FormInsertUpdateJob(Job job, int opc)
+        private Job job;
+        private LinkToDDBBDataContext dc = new LinkToDDBBDataContext();
+
+        public FormInsertUpdateJob(SqlConnection conn, Job j ,int opc)
         {
             InitializeComponent();
-            this.job = job;
+
+            this.conn = conn;
+            this.job = j;
+            this.opc = opc;
             CheckOption(opc); // 0 for create 1 for update
+
             DialogResult = DialogResult.Cancel;
         }
 
@@ -35,23 +43,10 @@ namespace IliasOtsmanConnBBDD
             {
                 TitleLabel.Text = $"Modificar trabajo";
                 ActionJobBtn.Text = "Modificar";
+
                 TitleTextBox.Text = job.JobTitle;
-
-                if (job.MinSalary == null)
-                {
-                    MinNumeric.Value = 0;
-                    MinNumeric.Enabled = false;
-                }
-                else
-                    MinNumeric.Value = (decimal)job.MinSalary;
-
-                if (job.MaxSalary == null)
-                {
-                    MaxNumeric.Value = 0;
-                    MaxNumeric.Enabled = false;
-                }
-                else
-                    MaxNumeric.Value = (decimal)job.MaxSalary;
+                MinNumeric.Value = (job.MinSalary == null) ? 0 : (decimal)job.MinSalary;
+                MaxNumeric.Value = (job.MaxSalary == null) ? 0 : (decimal)job.MaxSalary;
             }
         }
 
@@ -62,17 +57,23 @@ namespace IliasOtsmanConnBBDD
 
         private void MinNumeric_ValueChanged(object sender, EventArgs e)
         {
+            if (MaxNumeric.Value < MinNumeric.Value)
+                MaxNumeric.Value = MinNumeric.Value;
+
             CheckData();
         }
 
         private void MaxNumeric_ValueChanged(object sender, EventArgs e)
         {
+            if (MaxNumeric.Value < MinNumeric.Value)
+                MaxNumeric.Value = MinNumeric.Value;
+
             CheckData();
         }
 
         private void CheckData()
         {
-            if (TitleTextBox.Text.Length > 0)
+            if (TitleTextBox.Text.Length > 0 && MaxNumeric.Value >= MinNumeric.Value)
                 InsertButtonOn();
             else
                 InsertButtonOff();
@@ -92,17 +93,69 @@ namespace IliasOtsmanConnBBDD
 
         private void ActionJobBtn_Click(object sender, EventArgs e)
         {
-            PassJobData();
-        }
-
-        private void PassJobData()
-        {
             job.JobTitle = TitleTextBox.Text;
-            job.MinSalary = MinNumeric.Enabled ? MinNumeric.Value : (decimal?)null;
-            job.MaxSalary = MaxNumeric.Enabled ? MaxNumeric.Value : (decimal?)null;
+            job.MinSalary = (MinNumeric.Value > 0) ? MinNumeric.Value : (decimal?)null;
+            job.MaxSalary = (MaxNumeric.Value > 0) ? MaxNumeric.Value : (decimal?)null;
+
+            if (opc == 0)
+                InsertJob2(job);
 
             DialogResult = DialogResult.OK;
             this.Close();
+        }
+
+
+
+
+
+        private void InsertJob2(Job j)
+        {
+            jobs newJob = new jobs
+            {
+                job_title = j.JobTitle,
+                min_salary = j.MinSalary,
+                max_salary = j.MaxSalary
+            };
+
+            dc.jobs.InsertOnSubmit(newJob);
+            dc.SubmitChanges();
+        }
+
+        private void InsertJob(Job j)
+        {
+            string query = $@"INSERT INTO jobs (job_title, min_salary, max_salary)
+                              VALUES (@jobTitle, @salarioMin, @salarioMax); SELECT CAST(SCOPE_IDENTITY() as INT)";
+
+            using (SqlCommand command = new SqlCommand(query, conn))
+            {
+                SqlParameter jobTitle = new SqlParameter("@jobTitle", SqlDbType.VarChar, 35);
+                jobTitle.Value = j.JobTitle;
+                command.Parameters.Add(jobTitle);
+
+                SqlParameter salarioMin = new SqlParameter("@salarioMin", SqlDbType.Decimal);
+                salarioMin.Precision = 8;
+                salarioMin.Scale = 2;
+
+                SqlParameter salarioMax = new SqlParameter("@salarioMax", SqlDbType.Decimal);
+                salarioMax.Precision = 8;
+                salarioMax.Scale = 2;
+
+                if (j.MinSalary == null)
+                    salarioMin.Value = DBNull.Value;
+                else
+                    salarioMin.Value = j.MinSalary;
+                command.Parameters.Add(salarioMin);
+
+
+                if (j.MaxSalary == null)
+                    salarioMax.Value = DBNull.Value;
+                else
+                    salarioMax.Value = j.MaxSalary;
+                command.Parameters.Add(salarioMax);
+
+                object id = command.ExecuteScalar();
+                j.JobId = (int)id;
+            }
         }
     }
 }

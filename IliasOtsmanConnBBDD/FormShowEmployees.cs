@@ -35,47 +35,6 @@ namespace IliasOtsmanConnBBDD
             GetLocations2();
         }
 
-        private void GetEmployees2(string name, string surname, string city)
-        {
-            city = (city == "Todos") ? null : city;
-
-            var data = from e in dc.employees
-                        join d in dc.departments on e.department_id equals d.department_id
-                        join l in dc.locations on d.location_id equals l.location_id
-                        where (city == null || l.city == city) &&
-                              (name == null || e.first_name.StartsWith(name)) &&
-                              (surname == null || e.last_name.StartsWith(surname))
-                        select e;
-
-            foreach (employees emp in data)
-            {
-                EmployeesListBox.Items.Add(emp);
-            }
-
-        }
-
-        private void GetLocations2()
-        {
-            CitiesComboBox.Items.Clear();
-            var data = from l in dc.locations
-                       select l;
-            foreach (locations loc in data)
-            {
-                CitiesComboBox.Items.Add(loc);
-            }
-            CitiesComboBox.Items.Add("Todos");
-            CitiesComboBox.SelectedItem = "Todos";
-        }
-
-        private void UpdateList2()
-        {
-            EmployeesListBox.Items.Clear();
-            GetEmployees2(NombreTextBox.Text, ApellidoTextBox.Text, CitiesComboBox.Text);
-
-            if (EmployeesListBox.Items.Count == 0)
-                EmployeesListBox.Items.Add("No hay registros disponibles.");
-        }
-
         private void NombreTextBox_TextChanged(object sender, EventArgs e)
         {
             UpdateList2();
@@ -94,7 +53,34 @@ namespace IliasOtsmanConnBBDD
             //UpdateList();
         }
 
-        private List<Employee> GetEmployees(string name, string surname, string city)
+
+
+
+
+        private void GetEmployees2(string name, string surname, string city)
+        {
+            city = (city == "Todos") ? null : city;
+
+            var data = from e in dc.employees
+                       join d in dc.departments on e.department_id equals d.department_id
+                       join l in dc.locations on d.location_id equals l.location_id
+                       where (city == null || l.city == city) &&
+                             (name == null || e.first_name.StartsWith(name)) &&
+                             (surname == null || e.last_name.StartsWith(surname))
+                       select e;
+
+            if (data == null)
+                EmployeesListBox.Items.Add("No hay registros disponibles.");
+            else
+            {
+                foreach (employees emp in data)
+                {
+                    EmployeesListBox.Items.Add(emp);
+                }
+            }
+        }
+
+        private void GetEmployees(string name, string surname, string city)
         {
             city = city == "Todos" ? null: city;
             List<Employee> employees = new List<Employee>();
@@ -182,7 +168,21 @@ namespace IliasOtsmanConnBBDD
                 reader.Close();
             }
 
-            return employees;
+            EmployeesListBox.Items.AddRange(employees.ToArray());
+        }
+
+
+        private void GetLocations2()
+        {
+            CitiesComboBox.Items.Clear();
+            var data = from l in dc.locations
+                       select l;
+            foreach (locations loc in data)
+            {
+                CitiesComboBox.Items.Add(loc);
+            }
+            CitiesComboBox.Items.Add("Todos");
+            CitiesComboBox.SelectedItem = "Todos";
         }
 
         private List<Location> GetLocations()
@@ -224,11 +224,20 @@ namespace IliasOtsmanConnBBDD
             return locations;
         }
 
+
+        private void UpdateList2()
+        {
+            EmployeesListBox.Items.Clear();
+            GetEmployees2(NombreTextBox.Text, ApellidoTextBox.Text, CitiesComboBox.Text);
+        }
+
         private void UpdateList()
         {
-            employees = GetEmployees(NombreTextBox.Text, ApellidoTextBox.Text, CitiesComboBox.Text);
             EmployeesListBox.Items.Clear();
-            EmployeesListBox.Items.AddRange(employees.ToArray());
+
+            GetEmployees(NombreTextBox.Text, ApellidoTextBox.Text, CitiesComboBox.Text);
+            if (EmployeesListBox.Items.Count == 0)
+                EmployeesListBox.Items.Add("No hay registros disponibles.");
         }
     }
 
